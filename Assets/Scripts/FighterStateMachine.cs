@@ -1,67 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
 public class FighterStateMachine : MonoBehaviour {
-
     public FighterState CurrentState { get; private set; }
     private Animator animator;
 
-    public FighterStateMachine() {
-
+    private void Start() {
+        animator = GetComponent<Animator>();
+        CurrentState = FighterState.idle;
     }
 
-    void Start() {
-        animator = GetComponent<Animator>();        
-    }
+    public void SwitchState(FighterState newState) {        
+        animator.SetBool(CurrentState.ToString(), false);
+        Debug.Log(gameObject.name + ": " + CurrentState.ToString() + " ---> " + newState.ToString());
 
-    public void SwitchState(FighterState newState) {
-        CurrentState = newState;
-
-        switch(CurrentState) {
-            default:
-            case FighterState.idle:
-                break;
-
+        switch(newState) {        
             case FighterState.leftPunch:
+                animator.SetBool("leftPunch", true);
                 break;
 
             case FighterState.rightPunch:
-                break;
-
-            case FighterState.block:
+                animator.SetBool("rightPunch", true);
                 break;
 
             case FighterState.takeDmg:
+                animator.CrossFade("TakeDmg", 0.05f);
+                animator.SetBool("takeDmg", true);
+                break;
+
+            default:
+                animator.SetBool(newState.ToString(), true);
                 break;
         }
-    }
-
-    void Update() {
         
-        //if(Keyboard.current.eKey.isPressed) {
-        //    rightPunch.Enter();
-        //} 
-        //else {
-        //    animator.SetBool(rightPunch.animBoolString, false);
-        //}
-
-        //if(Keyboard.current.qKey.isPressed) {
-        //    animator.SetBool("leftPunch", true);
-        //} 
-        //else {
-        //    animator.SetBool("leftPunch", false);
-        //}
-
-        //if(Keyboard.current.wKey.isPressed) {
-        //    animator.SetBool("block", true);
-        //} 
-        //else {
-        //    animator.SetBool("block", false);
-        //}
+        CurrentState = newState;
     }
+
+    // Animation events //////
+    void OnPunchAnimationEnd() {
+        SwitchState(FighterState.idle);
+    }
+
+    void OnTakeDmgAnimationEnd() {
+        SwitchState(FighterState.idle);
+    }
+    //////////////////////////
 }
 
 public enum FighterState {
