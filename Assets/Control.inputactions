@@ -1,0 +1,34 @@
+{
+    "name": "Control",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "ff0b3269-a8f8-4a2b-bb0b-4c211d583e91",
+            "actions": [
+                {
+                    "name": "Punch",
+                    "type": "Button",
+                    "id": "0c314add-2e70-4f91-bd96-8e2f91294a15",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e269c0bd-fb97-4369-a9f5-6902df5a3d6a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Punch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
