@@ -1,31 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(FighterController))]
 public class PlayerController : MonoBehaviour
 {
-    private FighterController fighter;
+    private FighterController targetFighter;
 
     private void Start() {
-        fighter = GetComponent<FighterController>();
+        targetFighter = GetComponent<FighterController>();
     }
 
-    void Update()
-    {
+    private void Update() {
         if(Keyboard.current.eKey.wasPressedThisFrame) {
-            fighter.RightPunch();
+            targetFighter.RightPunch();
         }
 
         if(Keyboard.current.qKey.wasPressedThisFrame) {
-            fighter.LeftPunch();
+            targetFighter.LeftPunch();
         }
 
         if(Keyboard.current.wKey.isPressed) {
-            fighter.EnterBlock();
+            targetFighter.EnterBlock();
         } else if(Keyboard.current.wKey.wasReleasedThisFrame) {
-            fighter.ExitBlock();
+            targetFighter.ExitBlock();
         }
     }
 }

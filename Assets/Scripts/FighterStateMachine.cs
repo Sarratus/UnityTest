@@ -12,22 +12,22 @@ public class FighterStateMachine : MonoBehaviour {
         CurrentState = FighterState.idle;
     }
 
-    public void SwitchState(FighterState newState) {        
+    public void SwitchState(FighterState newState) {
+        if(CurrentState == FighterState.death || CurrentState == FighterState.pause)
+            if(newState != FighterState.resurrection) return; 
+        
         animator.SetBool(CurrentState.ToString(), false);
-        Debug.Log(gameObject.name + ": " + CurrentState.ToString() + " ---> " + newState.ToString());
+        CurrentState = newState;
+        //Debug.Log(gameObject.name + ": " + CurrentState.ToString() + " ---> " + newState.ToString());
 
-        switch(newState) {        
-            case FighterState.leftPunch:
-                animator.SetBool("leftPunch", true);
-                break;
-
-            case FighterState.rightPunch:
-                animator.SetBool("rightPunch", true);
-                break;
-
+        switch(newState) {
             case FighterState.takeDmg:
                 animator.CrossFade("TakeDmg", 0.05f);
                 animator.SetBool("takeDmg", true);
+                break;
+
+            case FighterState.resurrection:
+                CurrentState = FighterState.idle;
                 break;
 
             default:
@@ -35,7 +35,6 @@ public class FighterStateMachine : MonoBehaviour {
                 break;
         }
         
-        CurrentState = newState;
     }
 
     // Animation events //////
@@ -54,5 +53,8 @@ public enum FighterState {
     rightPunch,
     leftPunch,
     block,
-    takeDmg
+    takeDmg,
+    death,
+    resurrection,
+    pause
 }

@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 857e7d6c3ecff4d42be0cb5b2c5b445d, type: 3}
-  m_Name: PlayerStats
+  m_Script: {fileID: 11500000, guid: 3519c51f655988847a321e7cb73ad243, type: 3}
+  m_Name: NormalAI
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  baseDamage: 8
-  resurrectionTimerDuration: 10
-  resurrectionChance: 0
+  aiUpdatePeriod: 0.6
+  punchChance: 0.37
+  blockChance: 0.24

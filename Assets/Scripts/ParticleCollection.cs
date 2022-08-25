@@ -18,7 +18,7 @@ public class ParticleCollection : MonoBehaviour
         transform.parent = objectToAttach;
         transform.localPosition = Vector3.zero;
 
-        targetFighter.Punch += Play;
+        targetFighter.GetPunch += Play;
     }
 
     public void Play(int damage, bool isLeftPunch) {
