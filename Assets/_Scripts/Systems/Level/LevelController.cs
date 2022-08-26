@@ -10,7 +10,7 @@ public class LevelController : MonoBehaviour
 
     private FighterController player;
     private FighterController opponent;
-    private EnemyAI opponentAI;
+    private OpponentAI opponentAI;
 
     private int currentLevel = 0;
 
@@ -30,13 +30,13 @@ public class LevelController : MonoBehaviour
         // find and differentiate all fighters
         FighterController[] fighters = GameObject.FindObjectsOfType<FighterController>();
         foreach(var fighter in fighters) {
-            if(fighter.gameObject.TryGetComponent<PlayerController>(out PlayerController playerController)) {
+            if(fighter.gameObject.TryGetComponent<PlayerKeyboardControl>(out PlayerKeyboardControl playerController)) {
                 if(!player) player = fighter;
                 continue;
             }
-            if(fighter.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyAI)) {
+            if(fighter.gameObject.TryGetComponent<OpponentAI>(out OpponentAI enemyAI)) {
                 if(!opponent) opponent = fighter;
-                opponentAI = opponent.GetComponent<EnemyAI>();
+                opponentAI = opponent.GetComponent<OpponentAI>();
                 continue;
             }
         }
@@ -50,7 +50,7 @@ public class LevelController : MonoBehaviour
         currentLevel = level;
         var levelStats = levels[currentLevel];
 
-        print(level);
+        print("Loading " + level.ToString() + " level");
 
         player.SetStatsAndReset(levelStats.PlayerStats);
         opponent.SetStatsAndReset(levelStats.OpponentStats);

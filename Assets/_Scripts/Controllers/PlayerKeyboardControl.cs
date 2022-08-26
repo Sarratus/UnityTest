@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(FighterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerKeyboardControl : MonoBehaviour
 {
     private FighterController targetFighter;
 

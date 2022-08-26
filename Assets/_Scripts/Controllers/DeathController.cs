@@ -32,11 +32,11 @@ public class DeathController : MonoBehaviour
         // find and differentiate all fighters
         FighterController[] fighters = GameObject.FindObjectsOfType<FighterController>();
         foreach(var fighter in fighters) {
-            if(fighter.gameObject.TryGetComponent<PlayerController>(out PlayerController playerController)) {
+            if(fighter.gameObject.TryGetComponent<PlayerKeyboardControl>(out PlayerKeyboardControl playerController)) {
                 if(!player) player = fighter;
                 continue;
             }
-            if (fighter.gameObject.TryGetComponent<EnemyAI>(out EnemyAI enemyAI)) {
+            if (fighter.gameObject.TryGetComponent<OpponentAI>(out OpponentAI enemyAI)) {
                 if(!opponent) opponent = fighter;
                 continue;
             }

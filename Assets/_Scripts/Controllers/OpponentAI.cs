@@ -2,16 +2,16 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(FighterController))]
-public class EnemyAI : MonoBehaviour
+public class OpponentAI : MonoBehaviour
 {
     private AIStats stats;
     
     private FighterController targetFighter;
 
     private float elapsedTime = 0f;
-    private float aiUpdatePeriod = 0.65f;
-    private float punchChance = 0.35f;
-    private float blockChance = 0.15f;
+    private float aiUpdatePeriod;
+    private float punchChance;
+    private float blockChance;
 
     private void Awake() {
         targetFighter = GetComponent<FighterController>();        
@@ -29,13 +29,11 @@ public class EnemyAI : MonoBehaviour
         if(isOpponentPunch && !isPunchChecked)
             if(targetFighter.GetCurrentState() != FighterState.block)
                 if(Random.value <= blockChance) {
-                    Debug.Log("Block");
                     targetFighter.EnterBlock();
                     StartCoroutine(ExitBlockAfterSeconds(0.5f * Random.Range(0.8f, 1.1f)));
                     return;
 
                 } else {
-                    Debug.Log("Don't Blocked");
                     isPunchChecked = true;
                 }
 
@@ -63,9 +61,7 @@ public class EnemyAI : MonoBehaviour
 
     public void SetStatsAndReset(AIStats stats) {
         this.stats = stats;
-        print(this.stats.blockChance);
         ResetStats();
-        print(this.stats.blockChance);
     }
 
     private void ResetStats() {
