@@ -22,7 +22,7 @@ public class FighterStateMachine : MonoBehaviour {
 
         switch(newState) {
             case FighterState.takeDmg:
-                animator.CrossFade("TakeDmg", 0.05f);
+                animator.CrossFade("takeDmg", 0.05f);
                 animator.SetBool("takeDmg", true);
                 break;
 
@@ -33,8 +33,11 @@ public class FighterStateMachine : MonoBehaviour {
             default:
                 animator.SetBool(newState.ToString(), true);
                 break;
-        }
-        
+        }        
+    }
+
+    public void InterruptPunch() {
+        animator.Play("");
     }
 
     // Animation events //////

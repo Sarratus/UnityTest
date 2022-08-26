@@ -15,4 +15,4 @@ MonoBehaviour:
   maxHealth: 100
   baseDamage: 8
   resurrectionTimerDuration: 10
-  resurrectionChance: 0
+  resurrectionChance: 0.5
